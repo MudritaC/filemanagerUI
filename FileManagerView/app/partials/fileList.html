@@ -1,0 +1,11 @@
+
+<div class="row">
+    <div class="col-sm-06" data-ng-controller="MainController">Welcome {{userNameTest}}</div>
+    <div class="col-sm-12" align="center" data-ng-controller="UploadPopUpController">
+        <button  ng-click="open()" class="btn btn-primary btn-lg">Upload File</button>
+    </div>
+</div>
+<br><br>
+<div class="col-sm-12"  data-ng-init="init()">
+    <div ng-if="!refresh" class="ui-grid" data-ui-grid="gridOptions"></div>
+</div>

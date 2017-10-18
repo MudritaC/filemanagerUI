@@ -1,0 +1,69 @@
+<div class="modal-dialog">
+    <div class="container-new" align="center">
+        <div class="modal-body">
+            <div class="row"><div class="col-sm-10" align="center">
+            <h2>Login</h2><br>
+            </div></div>
+
+            <form name="loginForm" class="form-group-1" ng-submit="onSubmit()">
+                <div class="row">
+                    <div class="col-sm-10" align="center" ng-show="isError"><label><font color="red">{{errorMessage}}</font></label></div>
+                </div>
+                <div class="row"><div class="col-sm-10">
+                    <input type="text" class="form-control" placeholder="User ID" name="userID" data-ng-model="user.userID" ng-required="true"  username-available="user.userI" />
+                    <span class="error-message" ng-show="loginForm.userID.$dirty && loginForm.userID.$error.required">Please enter valid Login ID </span>
+                    <br>
+                </div></div>
+
+                <div class="row" ng-show="isNewUser">
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" name="fname" placeholder="First Name"data-ng-model="user.firstname" ng-required="isNewUser"/>
+                    <span class="error-message" ng-show="loginForm.fname.$dirty && loginForm.fname.$error.required">User first name is mandatory</span>
+                    <br>
+                </div></div>
+
+                <div class="row" ng-show="isNewUser"><div class="col-sm-10">
+                    <input type="text" class="form-control" name="lname" placeholder="Last Name"data-ng-model="user.lastname" ng-required="isNewUser"/>
+                    <span class="error-message" ng-show="loginForm.lname.$dirty && loginForm.lname.$error.required">User last name is mandatory</span>
+                    <br>
+                </div></div>
+
+                <div class="row">
+                    <div class="col-sm-10">
+                    <input type="password" class="form-control"  name="password" placeholder="Password" data-ng-model="user.password" ng-required="true">
+                        <span class="error-message" ng-show="loginForm.password.$dirty && loginForm.password.$error.required">Password is mandatory </span>
+                        <br>
+                    </div>
+                </div>
+
+                <div class="row" ng-show="isNewUser">
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" name="cnfrmpassword" placeholder="Confirm Password" data-ng-model="user.confirmPassword" ng-required="true"  ng-if="isNewUser" compare-to="user.password">
+                        <span class="error-message" ng-show="loginForm.cnfrmpassword.$dirty && (loginForm.cnfrmpassword.$error.required || user.confirmPassword!=user.password )">Password and Confirm password does not match</span>
+                        <br>
+                    </div>
+                </div>
+
+                <div class="row" align="center" ng-hide="isNewUser">
+                    <div class="col-sm-5">
+                        <input type="submit" class="btn btn-success" value="Login"/>
+                     </div>
+                    <div class="col-sm-5" ng-hide="isNewUser">
+                        <button class="btn btn-warning" ng-click="newUser()">New User</button>
+                    </div>
+                </div>
+
+                <div class="row" align="center" ng-show="isNewUser">
+                    <div class="col-sm-10">
+                        <input type="submit" class="btn btn-success" value="Sign Up"/>
+                    </div>
+                </div>
+
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+

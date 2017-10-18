@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>My AngularJS App</title>
+  <link rel="stylesheet" href="lib/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="lib/angular-ui-grid/ui-grid.css">
+
+  <link rel="stylesheet" href="css/app.css"/>
+  <link rel="stylesheet" href="css/form.css"/>
+
+  <link rel="stylesheet" href="lib/angular-toastr/angular-toastr.css">
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="http://localhost:63342/filemanager/FileManagerView/index.html?_ijt=a8e3blj9ea6lpr16msba9ml88n#!#%2Fview2" >
+        <div>
+          <img src="img/upload-icon.jpg" width="50" height="30"/>
+        </div>
+      </a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#!/home">Home</a></li>
+        <li ng-show="isLoggedin"><a href="#!/myfiles">My Files</a></li>
+        <!--<li><a href="#">All Files</a></li>-->
+        <!--<li><a href="#">About Us </a></li>-->
+      </ul>
+      <div data-ng-controller="LoginController">
+      <ul class="nav navbar-nav navbar-right">
+        <button  ng-click="open()" class="btn btn-warning">Sign In</button>
+
+      </ul>
+    </div>
+  </div>
+  </div>
+</nav>
+
+<!--<ul class="menu">-->
+  <!--<li><a href="#!/view1">view1</a></li>-->
+  <!--<li><a href="#!/view2">view2</a></li>-->
+<!--</ul>-->
+
+
+<!--<div data-ng-controller="MainController"data-ng-init="init()" >-->
+  <!--<div ng-show="isLoggedin" >{{isLoggedin}}-->
+
+
+
+
+
+
+
+<data-ng-view></data-ng-view>
+  <br><br><br><br><br>
+
+
+
+<!--<div class="col-sm-12" data-ng-controller="FileListController" data-ng-init="init()">-->
+  <!--<div ng-if="!refresh" class="ui-grid" data-ui-grid="gridOptions"></div>-->
+<!--</div>-->
+
+  <br>
+
+
+
+  <!--</div>-->
+<!--</div>-->
+
+
+
+<footer class="container-fluid bg-4 text-center">
+  <div>Filemanager app: v<span app-version></span></div>
+  <!--<p>Bootstrap Theme Made By <a href="https://www.w3schools.com">www.w3schools.com</a></p>-->
+</footer>
+
+
+  <script src="lib/jquery/jquery.min.js"></script>
+  <script src="lib/bootstrap/bootstrap.min.js"></script>
+  <script src="lib/angular-1.6.6/angular.js"></script>
+  <script src="lib/angular-1.6.6/angular-route.js"></script>
+  <script src="lib/angular/ui-bootstrap-tpls-2.5.0.min.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/directives.js"></script>
+  <script src="Modules/login/js/login.js"></script>
+  <script src="Modules/login/js/controllers.js"></script>
+  <script src="Modules/file/file.js"></script>
+  <script src="Modules/file/controller.js"></script>
+  <!--<script src="Modules/Apartment/js/apartment.js"></script>-->
+  <!--<script src="Modules/Apartment/js/controllers.js"></script>-->
+  <script src="lib/angular-ui-grid/ui-grid.js"></script>
+  <script src="lib/angular-ui-grid/ui-grid.min.js"></script>
+  <script src="lib/angular-toastr/angular-toastr.tpls.js"></script>
+
+
+</body>
+</html>
