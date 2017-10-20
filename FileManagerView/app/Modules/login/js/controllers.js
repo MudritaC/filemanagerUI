@@ -5,13 +5,26 @@
 angular.module('myApp.login.controllers', [])
 
 
-   .controller('LoginController', function($scope,$uibModal,$rootScope) {
+   .controller('LoginController', function($scope,$uibModal,$rootScope,MainService,$location) {
+       $scope.isLoggedin=MainService.isLoggedin;
+       $scope.$on('loginDetailsUpdated',function(event,data){
+           $scope.isLoggedin=MainService.isLoggedin;
+       });
         $scope.open=function(){
             console.log('opening pop up');
             $rootScope.modalInstance=$uibModal.open({
                 templateUrl:'Modules/login/login.html',
                 controller:'SubmitController'
             });
+        }
+        $scope.close=function(){
+            var res={};
+            res.userID=undefined;
+            res.firstname=undefined;
+            res.lastname=undefined;
+            res.isLoggedin=false;
+            MainService.loginDetails(res);
+            $location.path('/home');
         }
 
 
@@ -99,9 +112,10 @@ angular.module('myApp.login.controllers', [])
                         }
                         else if(res.userID!=""){
                             toastr.info("Hello!! " + res.userID);
+                            res.isLoggedin=true;
                             MainService.loginDetails(res);
                             $rootScope.modalInstance.close();
-                            $location.path('myfiles');
+                            $location.path('myfiles/'+res.userID);
                         }
 
                     });

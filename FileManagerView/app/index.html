@@ -28,16 +28,16 @@
         </div>
       </a>
     </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
+    <div class="collapse navbar-collapse" id="myNavbar" data-ng-controller="LoginController">
       <ul class="nav navbar-nav">
         <li class="active"><a href="#!/home">Home</a></li>
-        <li ng-show="isLoggedin"><a href="#!/myfiles">My Files</a></li>
-        <!--<li><a href="#">All Files</a></li>-->
-        <!--<li><a href="#">About Us </a></li>-->
+        <li ng-show="isLoggedin"><a href="#!/myfiles/:userID">My Files</a></li>
+
       </ul>
-      <div data-ng-controller="LoginController">
+      <div>
       <ul class="nav navbar-nav navbar-right">
-        <button  ng-click="open()" class="btn btn-warning">Sign In</button>
+        <button  ng-hide="isLoggedin" ng-click="open()" class="btn btn-warning">Sign In</button>
+        <button  ng-show="isLoggedin" ng-click="close()" class="btn btn-warning">Sign Out</button>
 
       </ul>
     </div>
@@ -45,14 +45,6 @@
   </div>
 </nav>
 
-<!--<ul class="menu">-->
-  <!--<li><a href="#!/view1">view1</a></li>-->
-  <!--<li><a href="#!/view2">view2</a></li>-->
-<!--</ul>-->
-
-
-<!--<div data-ng-controller="MainController"data-ng-init="init()" >-->
-  <!--<div ng-show="isLoggedin" >{{isLoggedin}}-->
 
 
 
@@ -65,16 +57,9 @@
 
 
 
-<!--<div class="col-sm-12" data-ng-controller="FileListController" data-ng-init="init()">-->
-  <!--<div ng-if="!refresh" class="ui-grid" data-ui-grid="gridOptions"></div>-->
-<!--</div>-->
-
   <br>
 
 
-
-  <!--</div>-->
-<!--</div>-->
 
 
 
@@ -98,8 +83,6 @@
   <script src="Modules/login/js/controllers.js"></script>
   <script src="Modules/file/file.js"></script>
   <script src="Modules/file/controller.js"></script>
-  <!--<script src="Modules/Apartment/js/apartment.js"></script>-->
-  <!--<script src="Modules/Apartment/js/controllers.js"></script>-->
   <script src="lib/angular-ui-grid/ui-grid.js"></script>
   <script src="lib/angular-ui-grid/ui-grid.min.js"></script>
   <script src="lib/angular-toastr/angular-toastr.tpls.js"></script>

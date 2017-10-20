@@ -11,10 +11,17 @@ angular.module('myApp.controllers', [])
         $scope.refresh = true;
         $scope.user={};
         $scope.user.userID=MainService.loggedUser.userID;
+        $scope.userName=MainService.loggedUser.fName + " " + MainService.loggedUser.lName;
+        $scope.isLoggedin=MainService.isLoggedin;
 
         $scope.init=function(){
             $scope.getFilelist();
         };
+
+        $scope.$on('loginDetailsUpdated',function(event,data){
+            $scope.userName=MainService.loggedUser.fName + " " + MainService.loggedUser.lName;
+            $scope.isLoggedin=MainService.isLoggedin;
+        });
 
         var refresh = function() {
             $scope.refresh = true;
@@ -43,7 +50,6 @@ angular.module('myApp.controllers', [])
                             {field:'version', displayName:'Version',width: 150},
                             {field:'del',displayName:'',width: 150,cellTemplate:deleteButtonTemplate},
                             {field:'edit',displayName:'',width: 150,cellTemplate:updateButtonTemplate}]};
-                    console.log($scope.gridOptions);
                 });
             refresh();
 
@@ -58,13 +64,10 @@ angular.module('myApp.controllers', [])
             RestService.post('File/s3DeleteFile',row)
                 .then(function(res){
                     MainService.fileListUpdate();
-                console.log(res)
             });
-            console.log(row)
         }
 
         $scope.updateRow = function(row){
-            console.log(row);
 
             $scope.openUpdatePopup=function(){
                 $rootScope.modalInstance=$uibModal.open({
@@ -76,51 +79,17 @@ angular.module('myApp.controllers', [])
                         }
                     }
                 });
-            }
+            };
             $scope.openUpdatePopup();
         }
 
     })
     .controller('MainController',function($scope,MainService,$rootScope){
-
-        // $scope.init=function(){
-        //     $scope.isLoggedin=MainService.isLoggedin;
-        // }
-
         $rootScope.isLoggedin=MainService.isLoggedin;
         $scope.userNameTest=MainService.loggedUser.fName + " " + MainService.loggedUser.lName;
         $scope.$on('loginDetailsUpdated',function(event,data){
             $scope.userNameTest=MainService.loggedUser.fName + " " + MainService.loggedUser.lName;
             $rootScope.isLoggedin=MainService.isLoggedin;
-            console.log($rootScope.isLoggedin);
         })
     })
-
-    .controller('RouteController',function($scope,$location){
-                $scope.$on('$routeChangeStart', function(angularEvent, newUrl) {
-
-                    if (newUrl.requireAuth && !session.user) {
-                        // User isn’t authenticated
-                        $location.path("/login");
-                    }
-
-                });
-    })
-
-    .controller('view1Controller',function($scope){
-        console.log("view1 loaded");
-        $scope.message="Hello world";
-    })
-
-    .controller('MyCtrl1', function($scope,$location) {
-        $scope.loadview2=function(){
-            $location.path('/view2/'+$scope.firstname+'/'+$scope.lastname);
-        }
-    })
-
-
-
-  .controller('MyCtrl2', function($scope,$routeParams) {
-      $scope.firstname=$routeParams.firstname;
-      $scope.lastname=$routeParams.lastname;
-  });
+;

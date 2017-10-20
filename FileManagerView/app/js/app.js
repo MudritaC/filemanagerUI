@@ -1,9 +1,6 @@
 'use strict';
 
-/*angular.module('myApp', [
-    'myApp.controllers','apartmentModule'
-]);*/
-// Declare app level module which depends on filters, and services
+
 angular.module('myApp', [
     'ui.bootstrap',
     'ngRoute',
@@ -16,39 +13,24 @@ angular.module('myApp', [
     'fileModule'
 
 ])
-    .config(['$routeProvider',function($routeProvider){
-        $routeProvider.when('/home',{
-            templateUrl:'partials/welcomeView.html',
-            controller:'view1Controller'
+    .config(['$routeProvider',function($routeProvider,$rootScope){
+        $routeProvider.when('/',{
+            templateUrl:'partials/welcomeView.html'
         });
-        $routeProvider.when('/myfiles',{
-            // templateUrl: function(params) {
-            //      return params.isLoggedin == 'true' ? 'partials/fileList.html' : 'partials/welcomeView.html';
-            // },
-            templateUrl:'partials/fileList.html',
-            controller:'FileListController',
-            isloggedin:true
-            // resolve:{
-            //     mess:function($location){
-            //         var t=$rootScope.isLoggedin;
-            //         if(t==true){
-            //             $location.path('partials/fileList.html');
-            //         }
-            //     }
-            // }
+        $routeProvider.when('/home',{
+            templateUrl:'partials/welcomeView.html'
+        });
+        $routeProvider.when('/myfiles/:userID',{
+            templateUrl:function(params){
+                if(angular.isUndefined(params.userID)){
+                    return 'partials/welcomeView.html'
+                }
+                else {
+                    return 'partials/fileList.html'
+                }
+            },
+            controller:'FileListController'
         });
         $routeProvider.otherwise({redirectTo: '/home'});
     }]);
-    // .config(['$routeProvider','$locationProvider', function($routeProvider,$locationProvider) {
-    //     $routeProvider.when('/view1',
-    //         {controller: 'view1Controller',
-    //         templateUrl: 'partials/welcomeView.html' })
-    //         .when('/view2',{
-    //             controller:'MyCtrl1',
-    //             templateUrl:'partials/partial1.html'
-    //         });
-        // $routeProvider.when('/view2/:firstname/:lastname', {controller: 'MyCtrl2',
-        // templateUrl: 'partials/partial2.html'});
-  //$routeProvider.otherwise({redirectTo: '/view1'});
-  // $locationProvider.html5Mode(true);
-// }]);
+

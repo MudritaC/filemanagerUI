@@ -6,8 +6,6 @@ angular.module('myApp.file.controllers', [])
 
     .controller('UploadPopUpController', function($scope,$uibModal,$rootScope) {
         $scope.open=function(){
-            console.log('opening pop up');
-            //var popUpInstance=$uibModal.open({
             $rootScope.modalInstance=$uibModal.open({
                 templateUrl:'Modules/file/uploadFile.html',
                 controller:'FileUploadController'
@@ -47,7 +45,7 @@ angular.module('myApp.file.controllers', [])
                     fd.append('file',$scope.myfile);
                     fd.append('name',$scope.fileInfo.fileName);
 
-                    $http.post('http://ec2-52-11-106-133.us-west-2.compute.amazonaws.com/filemanager/File/s3UploadFiles',fd,{transformRequest: angular.identity,
+                    $http.post('http://ec2-52-11-106-133.us-west-2.compute.amazonaws.com:8080/filemanager/File/s3UploadFiles',fd,{transformRequest: angular.identity,
                         headers: {'Content-Type': undefined}})
                         .then(function (res) {
                             if(res.data.status=="SUCCESS"){
@@ -67,7 +65,6 @@ angular.module('myApp.file.controllers', [])
     })
 
     .controller('FileUpdateController', function ($scope,$http,RestService,$rootScope,toastr,MainService,rowData) {
-        console.log(rowData);
         $scope.isError=false;
         $scope.updateFileInfo={};
         $scope.updateFileInfo.fileId=rowData.fileId;
@@ -86,26 +83,28 @@ angular.module('myApp.file.controllers', [])
                 $scope.errorMessage="Please choose a file";
             }
             else{
-            var fd = new FormData();
-            fd.append('file',$scope.myfile);
-            fd.append('fileDesc',$scope.updateFileInfo.fileDsc);
-            fd.append('userId',$scope.updateFileInfo.userId);
-            fd.append('fileName',$scope.updateFileInfo.fileName);
-            fd.append('version',$scope.updateFileInfo.version);
+                toastr.info("File update is in progress...");
+                var fd = new FormData();
+                fd.append('file',$scope.myfile);
+                fd.append('fileDesc',$scope.updateFileInfo.fileDsc);
+                fd.append('userId',$scope.updateFileInfo.userId);
+                fd.append('fileName',$scope.updateFileInfo.fileName);
+                fd.append('version',$scope.updateFileInfo.version);
 
 
-            $http.post('http://ec2-52-11-106-133.us-west-2.compute.amazonaws.com/filemanager/File/s3UpdateFiles',fd,{transformRequest: angular.identity,
-                headers: {'Content-Type': undefined}})
-                .then(function (res) {
-                    $rootScope.modalInstance.close();
-                    if(res.data.status=="SUCCESS"){
-                        toastr.success("File uploaded successfully");
-                        MainService.fileListUpdate();
-                    }})
-                .catch(function (){
-                        if(res.data.status=="FAILURE"){
+                $http.post('http://ec2-52-11-106-133.us-west-2.compute.amazonaws.com:8080/filemanager/File/s3UpdateFiles',fd,{transformRequest: angular.identity,
+                    headers: {'Content-Type': undefined}})
+                    .then(function (res) {
+                        $rootScope.modalInstance.close();
+                        if(res.data.status=="SUCCESS"){
+                            toastr.success("File uploaded successfully");
+                            MainService.fileListUpdate();
+                        }})
+                    .catch(function (){
+                            if(res.data.status=="FAILURE"){
                             toastr.error("Oops!! something went wrong. Please try after sometime");
-                        }}
+                        }
+                    }
                 )}
         }
 

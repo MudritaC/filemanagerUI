@@ -1,11 +1,16 @@
-
+<div ng-hide="isLoggedin">
+    <p>You are not logged in. Please log in to continue</p>
+</div>
+<div ng-show="isLoggedin">
 <div class="row">
-    <div class="col-sm-06" data-ng-controller="MainController">Welcome {{userNameTest}}</div>
+    <div class="col-sm-06" ><p>&nbsp;&nbsp;&nbsp;   Welcome {{userName}}</p></div>
     <div class="col-sm-12" align="center" data-ng-controller="UploadPopUpController">
         <button  ng-click="open()" class="btn btn-primary btn-lg">Upload File</button>
     </div>
 </div>
+</div>
 <br><br>
-<div class="col-sm-12"  data-ng-init="init()">
+<div class="col-sm-12"  data-ng-init="init()" ng-show="isLoggedin">
     <div ng-if="!refresh" class="ui-grid" data-ui-grid="gridOptions"></div>
 </div>
+
