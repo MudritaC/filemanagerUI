@@ -21,6 +21,7 @@ angular.module('myApp.services', [])
     })
 
     .service ('RestService', function($http) {
+        //this.baseUrl = 'http://localhost:8080/filemanager/';
         this.baseUrl = 'http://ec2-52-11-106-133.us-west-2.compute.amazonaws.com:8080/filemanager/';
 
         this.post = function (url, data, params) {
@@ -67,10 +68,4 @@ angular.module('myApp.services', [])
         };
     })
 
-    .service('helloService',function($http){
-     this.GetApiCall=function (dataReceived) {
-       return $http.get('http://localhost:8080/FirstSpringMVCProject/welcome');
-
-     }
-})
     .value('version', '0.1');

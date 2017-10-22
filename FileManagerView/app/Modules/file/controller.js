@@ -45,6 +45,7 @@ angular.module('myApp.file.controllers', [])
                     fd.append('file',$scope.myfile);
                     fd.append('name',$scope.fileInfo.fileName);
 
+                    //$http.post('http://localhost:8080/filemanager/File/s3UploadFiles',fd,{transformRequest: angular.identity,
                     $http.post('http://ec2-52-11-106-133.us-west-2.compute.amazonaws.com:8080/filemanager/File/s3UploadFiles',fd,{transformRequest: angular.identity,
                         headers: {'Content-Type': undefined}})
                         .then(function (res) {
@@ -92,6 +93,8 @@ angular.module('myApp.file.controllers', [])
                 fd.append('version',$scope.updateFileInfo.version);
 
 
+
+                //$http.post('http://localhost:8080/filemanager/File/s3UpdateFiles',fd,{transformRequest: angular.identity,
                 $http.post('http://ec2-52-11-106-133.us-west-2.compute.amazonaws.com:8080/filemanager/File/s3UpdateFiles',fd,{transformRequest: angular.identity,
                     headers: {'Content-Type': undefined}})
                     .then(function (res) {

@@ -4,7 +4,7 @@
 
 angular.module('myApp.controllers', [])
 
-    .controller('FileListController', function($scope,$http,RestService,MainService,$uibModal,$rootScope,$timeout) {
+    .controller('FileListController', function($scope,$http,RestService,MainService,$uibModal,$rootScope,$timeout,toastr) {
         var linkCellTemplate = '<div class="ui-grid-cell-contents"><a href="{{ COL_FIELD }}">Download File</a></div>';
         var deleteButtonTemplate='<button ng-click="grid.appScope.deleteRow(row.entity)">Delete</button>';
         var updateButtonTemplate='<button ng-click="grid.appScope.updateRow(row.entity)">Update</button>';
@@ -63,6 +63,7 @@ angular.module('myApp.controllers', [])
         $scope.deleteRow = function(row){
             RestService.post('File/s3DeleteFile',row)
                 .then(function(res){
+                    toastr.success("File deleted successfully");
                     MainService.fileListUpdate();
             });
         }
