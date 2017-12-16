@@ -1,2 +1,2 @@
 # filemanagerUI
-UI in angular js
+UI written in angular js
